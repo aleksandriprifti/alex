@@ -30,7 +30,7 @@ addForm.addEventListener("submit", e => {
 
 // Delete task from list - In this case I have made use of event bubbling. Event is added to
 //  the ul element and trigered form the innermost target element
-const list = document.querySelector("#book-list ul");
+const list = document.querySelector("#task-list ul");
 
 list.addEventListener("click", e => {
   if (e.target.className == "delete") {
