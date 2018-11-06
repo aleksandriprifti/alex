@@ -1,24 +1,32 @@
-// // let myList = document.querySelectorAll("#book-list ul li .name");
-
-// // Array.from(myList).forEach(ele => {
-// //   ele.textContent += " boooo";
-// // });
-
-// let test = document.querySelector("#page-banner");
-// console.log(test.nodeType);
-// console.log(test.nodeName);
-// console.log(test.hasChildNodes());
-
-// const clonedNode = test.cloneNode(false);
-// console.log(clonedNode);
-
-document.addEventListener("mouseover", e => {
-  let x = e.screenX;
-  let y = e.screenY;
+// Change the bg color based on offsetX & offsetY properties 
+document.body.addEventListener("mouseover", e => {
+  let x = e.offsetX;
+  let y = e.offsetY;
   let divBg = document.querySelector("window");
-  document.body.style.backgroundColor = `rgb(${x}, ${y}, 120)`;
+  document.body.style.backgroundColor = `rgb(${x}, ${y}, 35)`;
 });
 
-// let mess = document.querySelector("#page-banner h1");
+// Delete task from list - Add event to the delete button in order to delete task from the list
+const list = document.querySelector('#book-list ul');
 
-// mess.textContent = x;
+list.addEventListener('click', (e) => {
+
+    if(e.target.className == 'delete'){
+        const li = e.target.parentElement;
+        list.removeChild(li);
+    }
+});
+
+// Adding a new task
+
+const addForm = document.forms['add-task'];
+
+addForm.addEventListener('submit', (e) => {
+   e.preventDefault();
+
+   const inputValue = addForm.querySelector('input[type="text"]').value;
+
+   console.log(inputValue);
+});
+
+//console.log(formList['add-task']);
