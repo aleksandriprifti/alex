@@ -1,32 +1,40 @@
-// Change the bg color based on offsetX & offsetY properties 
-document.body.addEventListener("mouseover", e => {
-  let x = e.offsetX;
-  let y = e.offsetY;
-  let divBg = document.querySelector("window");
-  document.body.style.backgroundColor = `rgb(${x}, ${y}, 35)`;
-});
-
-// Delete task from list - Add event to the delete button in order to delete task from the list
-const list = document.querySelector('#book-list ul');
-
-list.addEventListener('click', (e) => {
-
-    if(e.target.className == 'delete'){
-        const li = e.target.parentElement;
-        list.removeChild(li);
-    }
-});
-
 // Adding a new task
+const addForm = document.forms["add-task"];
 
-const addForm = document.forms['add-task'];
+addForm.addEventListener("submit", e => {
+  // Prevent the default behaviour of the submit event
+  e.preventDefault();
 
-addForm.addEventListener('submit', (e) => {
-   e.preventDefault();
+  let inputValue = addForm.querySelector('input[type="text"]').value;
 
-   const inputValue = addForm.querySelector('input[type="text"]').value;
+  // create element
+  const li = document.createElement("li");
+  const bookName = document.createElement("span");
+  const deleteBtn = document.createElement("span");
 
-   console.log(inputValue);
+  // add content
+  bookName.textContent = inputValue;
+  bookName.className = "name";
+  deleteBtn.textContent = "delete";
+  deleteBtn.className = "delete";
+
+  // append span elements to ul
+  li.appendChild(bookName);
+  li.appendChild(deleteBtn);
+
+  list.appendChild(li);
+
+  //inputValue.setAttribute("value", " ");
+  inputValue = " ";
 });
 
-//console.log(formList['add-task']);
+// Delete task from list - In this case I have made use of event bubbling. Event is added to
+//  the ul element and trigered form the innermost target element
+const list = document.querySelector("#book-list ul");
+
+list.addEventListener("click", e => {
+  if (e.target.className == "delete") {
+    const li = e.target.parentElement;
+    list.removeChild(li);
+  }
+});
